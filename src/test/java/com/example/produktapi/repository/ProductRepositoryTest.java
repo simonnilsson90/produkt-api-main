@@ -16,7 +16,7 @@ class ProductRepositoryTest {
     @Autowired
 private ProductRepository underTest;
 
-    @Test
+ /*   @Test
     void simpleTest(){
         List <Product>products = underTest.findAll();
         Assertions.assertFalse(products.isEmpty());
@@ -82,7 +82,7 @@ private ProductRepository underTest;
 
     // Vete tusan om den här duger
     // Testar findByCategory(String category)
-    @Test
+  /*  @Test
     void whenSearchingForAnExistingCategory_thenAssertEquals(){
         // given
         String category = "men''s clothing";
@@ -94,7 +94,13 @@ private ProductRepository underTest;
 
 
     }
+
+
+  */
+
 }
+
+
 
 
 

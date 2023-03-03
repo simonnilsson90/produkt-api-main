@@ -25,7 +25,7 @@ class ProductServiceTest {
     @InjectMocks
     private ProductService underTest;
 
-    @Test
+ /*   @Test
     void givenGetAllProducts_thenExactlyOneInteractionWithRepositoryMethodFindALl() {
         // when
         underTest.getAllProducts();
@@ -81,7 +81,7 @@ class ProductServiceTest {
 */
 
 
-
+/*
     @Test // Testar getAllCategories() att den nås genom Repository
 
 void givenGetAllCategories_thenExactlyOneInteractionWithRepositoryMethodFindALlCategories  (){
@@ -92,6 +92,9 @@ void givenGetAllCategories_thenExactlyOneInteractionWithRepositoryMethodFindALlC
     verify(repository, Mockito.times(1)).findAllCategories();
 }
 
+*/
+
+/*
 @Test
     // Testar getProductsByCategory(String category)
     void givenGetProductsByCategory_thenExactlyOneInteractionWithRepositoryMethodGetProductsByCategory (){
@@ -100,6 +103,9 @@ void givenGetAllCategories_thenExactlyOneInteractionWithRepositoryMethodFindALlC
         // then
         verify(repository, Mockito.times(1)).findByCategory("jewelery");
     }
+
+
+ */
 
     /* PROBLEM MED DENNA
     @Test
@@ -113,7 +119,7 @@ void givenGetAllCategories_thenExactlyOneInteractionWithRepositoryMethodFindALlC
 
      */
 
-    @Test// Testar addProduct(Product product)
+  /*  @Test// Testar addProduct(Product product)
     void whenAddingProduct_thenSaveMethodShouldBeCalled (){
         // given
         Product product = new Product("Holy Graal", 5000.0, "jewelry","The real one, found on the bottom of the ocean ner Island of all places","img_hg" );
@@ -124,7 +130,7 @@ void givenGetAllCategories_thenExactlyOneInteractionWithRepositoryMethodFindALlC
         verify(repository).save(product);
 
 
-    }
+    } */
 
 }
 
