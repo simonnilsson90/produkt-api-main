@@ -25,7 +25,7 @@ class ProductServiceTest {
     @InjectMocks
     private ProductService underTest;
 
- /*   @Test
+    @Test
     void givenGetAllProducts_thenExactlyOneInteractionWithRepositoryMethodFindALl() {
         // when
         underTest.getAllProducts();
@@ -33,7 +33,7 @@ class ProductServiceTest {
         verify(repository, Mockito.times(1)).findAll();
 
     }
-
+/*
 
     @Test
     void whenGettAllCategories_thenOnlyOneInteractionWithRepositoryMethodFindALlGetByCategory(){
