@@ -85,7 +85,7 @@ private ProductRepository underTest;
     @Test
     void whenSearchingForAnExistingCategory_thenAssertEquals(){
         // given
-        String category = "me''s clothing";
+        String category = "men''s clothing";
         // when
         underTest.findByCategory(category);
       assertEquals(category,"men''s clothing" );
