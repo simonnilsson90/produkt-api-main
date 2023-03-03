@@ -82,21 +82,20 @@ private ProductRepository underTest;
 
     // Vete tusan om den här duger
     // Testar findByCategory(String category)
-  /*  @Test
-    void whenSearchingForAnExistingCategory_thenAssertEquals(){
-        // given
-        String category = "men''s clothing";
-        // when
-        underTest.findByCategory(category);
-      assertEquals(category,"men''s clothing" );
-
-
-
-
-    }
 
 
   */
+    @Test
+    void whenSearchingForAnExistingCategory_thenAssertEquals(){
+        // given
+        String category = "me''s clothing";
+        // when
+        underTest.findByCategory(category);
+      assertEquals(category,"men''s clothing" );
+    }
+
+
+
 
 }
 
