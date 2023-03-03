@@ -64,6 +64,9 @@ private ProductRepository underTest;
        );
     }
 
+
+  */
+
     // Tester till inlämning
 
     // Testar findByTitle, att det är sant att en specifik titel existerar
@@ -84,7 +87,7 @@ private ProductRepository underTest;
     // Testar findByCategory(String category)
 
 
-  */
+
     @Test
     void whenSearchingForAnExistingCategory_thenAssertEquals(){
         // given
