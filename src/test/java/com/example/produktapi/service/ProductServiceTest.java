@@ -1,14 +1,15 @@
 package com.example.produktapi.service;
 
+import com.example.produktapi.exception.BadRequestException;
 import com.example.produktapi.model.Product;
 import com.example.produktapi.repository.ProductRepository;
+import jakarta.persistence.Id;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import static org.mockito.BDDMockito.*;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 
-import org.mockito.Mockito;
+import org.mockito.*;
+
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +26,8 @@ class ProductServiceTest {
     @InjectMocks
     private ProductService underTest;
 
+    @Captor
+    ArgumentCaptor<Product> productCaptor;
     @Test
     void givenGetAllProducts_thenExactlyOneInteractionWithRepositoryMethodFindALl() {
         // when
@@ -57,47 +60,47 @@ class ProductServiceTest {
 
 */
 
+    // Tester till inlämning
+
     // Metoder att testa:
     // getAllProducts()    Check
     // getAllCategories()  Check
     // getProductsByCategory(String category) check
-   // getProductById(Integer id)
-    // addProduct(Product product)
+    // getProductById(Integer id) Check men failar
+    // addProduct(Product product) Check men
     // Product updateProduct(Product updatedProduct, Integer id)
-    // deleteProduct(Integer id)
+    // deleteProduct(Integer id) Check
 
 
-/*
-    @Test
+
     // Testar getAllProducts() Kanske bara ta
-     @Test
-    void givenGetAllProducts_thenExactlyOneInteractionWithRepositoryMethodFindALl() {
-        // when
+    // Test Passed
+    @Test
+    void givenGetAllProducts_thenOnlyOneInteractionWithRepositoryMethodFindALl() {
+        // when, När vi ropar på getAllProducts
         underTest.getAllProducts();
-        // then
+        // then, då verifierar vi att vårt repository åberopas med Metoden findAll exakt en gång.
         verify(repository, Mockito.times(1)).findAll();
 
     }
-*/
 
+    @Test
+        // Testar getAllCategories() att den nås genom Repository
 
-/*
-    @Test // Testar getAllCategories() att den nås genom Repository
-
-void givenGetAllCategories_thenExactlyOneInteractionWithRepositoryMethodFindALlCategories  (){
+    void givenGetAllCategories_thenExactlyOneInteractionWithRepositoryMethodFindALlCategories() {
+        // Test Passed
         // when
         underTest.getAllCategories();
+
         // then
-    // then
-    verify(repository, Mockito.times(1)).findAllCategories();
-}
+        verify(repository, Mockito.times(1)).findAllCategories();
+    }
 
-*/
 
-/*
-@Test
-    // Testar getProductsByCategory(String category)
-    void givenGetProductsByCategory_thenExactlyOneInteractionWithRepositoryMethodGetProductsByCategory (){
+    @Test
+        // Testar getProductsByCategory(String category)
+    void givenGetProductsByCategory_thenOneInteractionWithRepositoryMethodGetProductsByCategory() {
+        // Test passed
         // when
         underTest.getProductsByCategory("jewelery");
         // then
@@ -105,21 +108,55 @@ void givenGetAllCategories_thenExactlyOneInteractionWithRepositoryMethodFindALlC
     }
 
 
- */
-
-    /* PROBLEM MED DENNA
     @Test
-    // Testar getProductById(Integer id)
-    void givenGetProductById_thenOnlyOneInteractionWithRepositoryMethodgetProductById() {
-        // when
-        underTest.getProductById();
-        // then
-        verify(repository, Mockito.times(1)).findById(1);
+        // Testar om det går att lägga till ny produkt?
+    // Test failed
+    void whenCreatingNewProduct_thenOneInteractionWithMethodGetProductsByCategory() {
+// given
+        Product product = new Product("Lasersvärd", 40.0, "sword", "red", "img");
+       // when
+        underTest.addProduct(product);
+
+        //then
+        BDDMockito.verify(repository).save(product);
+
     }
 
-     */
 
-  /*  @Test// Testar addProduct(Product product)
+    // PROBLEM MED DENNA - FRÅGA MATHILDA
+    @Test
+    // Testar getProductById(Integer id)
+    void whenGettingProductById_thenGetProductByIdShouldBeCalled() {
+// given
+
+        Product product = new Product("Adidas 500", 14.5, "shoes", "cool", "img");
+
+       given(repository.findById(1)).willReturn(Optional.of(product));
+
+       //when
+        underTest.getProductById(1);
+
+// then
+        BDDMockito.verify(repository).getReferenceById(1);
+
+
+        }
+
+    @Test
+    void testingIfProductIsEmptyThenThrowEntityNotFound (){
+
+
+
+
+
+
+
+    }
+
+
+
+    @Test// Testar addProduct(Product product)
+    // Är den här bara en kopia?
     void whenAddingProduct_thenSaveMethodShouldBeCalled (){
         // given
         Product product = new Product("Holy Graal", 5000.0, "jewelry","The real one, found on the bottom of the ocean ner Island of all places","img_hg" );
@@ -130,7 +167,39 @@ void givenGetAllCategories_thenExactlyOneInteractionWithRepositoryMethodFindALlC
         verify(repository).save(product);
 
 
-    } */
+    }
+/*
+    // Testar delete Product
+@Test
+    void deleteProduct(){
+        // when
+    repository.deleteById(1);
+    // then
+    BDDMockito.verify(repository).deleteById(1);
+}
+
+*/
+ /*
+
+// Testar att updateProduct
+    @Test
+    void upDateProduct(Product updatedProduct){
+
+        // when
+        repository.findById(1);
+        BDDMockito.verify(repository).save(updatedProduct);
+    }
+
+
+  */
+
+    @Test
+    // Product updateProduct(Product updatedProduct, Integer id)
+    void testingUpdateProduct () {
+// when
+
+
+    }
 
 }
 

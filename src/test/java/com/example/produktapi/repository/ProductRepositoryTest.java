@@ -16,11 +16,13 @@ class ProductRepositoryTest {
     @Autowired
 private ProductRepository underTest;
 
- /*   @Test
+    @Test
     void simpleTest(){
         List <Product>products = underTest.findAll();
         Assertions.assertFalse(products.isEmpty());
     }
+
+    /*
 
     @Test
     void whenSearchingForAnExistingTitle_thenReturnThatProduct  (){
@@ -64,38 +66,83 @@ private ProductRepository underTest;
        );
     }
 
+    // Testar findAllCategories
+        @Test
+    void simpleTest(){
+        List <Product>products = underTest.findAll();
+        Assertions.assertFalse(products.isEmpty());
+    }
+
 
   */
 
-    // Tester till inlämning
+    // Tester till inlämning:
+
+
+    // findByCategory
+    // findByTitle
+    // findAllCategories
+
 
     // Testar findByTitle, att det är sant att en specifik titel existerar
     // samt att det är falskt att en specifik titel inte existerar
     @Test
     void whenSearchingForAnExistingTitle_thenReturnPresentOptional (){
-        // given
-        String title = "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops";
-        // when
+        // given, Förutsatt att jag skapar/har en produkt
+        String title = "Fjallraven ";
+
+        underTest.save(new Product(title,
+                25.0,
+                "El",
+                "Bra att ha",
+                "enBild"));
+
+        // when, när hittar en titel
         Optional<Product> optionalProduct = underTest.findByTitle(title);
-        Assertions.assertAll(
-                () -> assertTrue(optionalProduct.isPresent()),
-                () -> assertFalse(optionalProduct.isEmpty())
-        );
+
+      //  then, då
+     //  Assertions.assertAll(
+      //         () -> assertTrue(optionalProduct.isPresent()),
+      //          () -> assertFalse(optionalProduct.isEmpty())
+        //);
+
+        Assertions.assertEquals(title, optionalProduct.get().getTitle());
     }
 
-    // Vete tusan om den här duger
+
     // Testar findByCategory(String category)
-
-
-
+// Testar om det är falskt att inskrivna kategorin är falsk
     @Test
-    void whenSearchingForAnExistingCategory_thenAssertEquals(){
+    void whenSearchingForANonExistingCategory_thenAssertFalse(){
         // given
         String category = "men''s clothing";
+
+        underTest.save(new Product("t-shirt",
+                25.0,
+                category,
+                "Bra att ha",
+                "enBild"));
+
         // when
-        underTest.findByCategory(category);
-      assertEquals(category,"men''s clothing" );
+        List<Product> optionalProduct = underTest.findByCategory(category);
+
+
+//then
+          Assertions.assertFalse(category.isEmpty());
+
+
     }
+
+    // Testar findAllCategories
+    // Testar att det är falskt att kategorierna i products är tomma?
+    @Test
+    void whenFindingAllCategories_thenReturnTrue(){
+        List<String> products = underTest.findAllCategories();
+        Assertions.assertFalse(products.isEmpty());
+        Assertions.assertTrue(products.addAll(products));
+    }
+
+
 
 
 

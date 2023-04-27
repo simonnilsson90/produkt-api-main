@@ -34,8 +34,8 @@ public class ProductService {
     }
 
     public Product getProductById(Integer id) {
-
         Optional<Product> product = productRepository.findById(id);
+
         if (product.isEmpty()) {
             throw new EntityNotFoundException(id);
         }
@@ -51,6 +51,10 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    public static void main(String[] args) {
+
+    }
+
     public Product updateProduct(Product updatedProduct, Integer id) {
 
         Optional<Product> product = productRepository.findById(id);
@@ -58,6 +62,7 @@ public class ProductService {
             throw new EntityNotFoundException(id);
         }
         return productRepository.save(product.get());
+
     }
 
     public void deleteProduct(Integer id) {

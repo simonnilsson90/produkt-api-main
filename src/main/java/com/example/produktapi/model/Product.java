@@ -28,7 +28,7 @@ public class Product {
         this.image = image;
     }
 
-    public Integer getId() {
+    public Integer getId(int i) {
         return id;
     }
 
