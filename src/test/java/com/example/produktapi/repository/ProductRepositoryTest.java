@@ -23,58 +23,13 @@ private ProductRepository underTest;
     }
 
     /*
+  1. Alla metoder i service-klassen samt våra egenskrivna metoder i repositoryt testas med lämpliga
+enhetstester (observera att det ibland kan vara lämpligt med fler enhetstester av samma metod)
+2. Mockning tillämpas där så är lämpligt, dvs. Åtminstone då serviceklassen enhetstestas ska repositoryt vara mockat.
+3. Konfiguration mot Github Actions som automatiskt bygger och kör alla tester för varje gång koden pushas.
 
-    @Test
-    void whenSearchingForAnExistingTitle_thenReturnThatProduct  (){
-        // given
-        String title = "En dator";
-        underTest.save(new Product(title,
-                25000.0,
-                "Elektronik",
-                "bra o ha",
-                "urTillBild"));
-        // when
-  Optional<Product> optionalProduct  = underTest.findByTitle(title);
+*/
 
-  //then
-        // Ett sätt att skriva tre tester
-        assertTrue(optionalProduct.isPresent());
-      assertFalse(optionalProduct.isEmpty());
-      assertEquals(title, optionalProduct.get().getTitle());
-
-
-        // Ett annat sätt att skriva samma tre tester
-      Assertions.assertAll(
-              () -> assertTrue(optionalProduct.isPresent()),
-        () -> assertFalse(optionalProduct.isPresent()),
-              () -> assertEquals(title, optionalProduct.get().getTitle())
-      );
-
-    }
-
-    @Test
-    void whenSearchingForNonExistingTitle_thenReturnEmptyOptional (){
-        // given
-        String title = "En titel som absolut inte finns";
-
-        // when
-       Optional<Product> optionalProduct = underTest.findByTitle(title);
-
-       Assertions.assertAll(
-               () -> assertFalse(optionalProduct.isPresent()),
-               () -> assertTrue(optionalProduct.isEmpty())
-       );
-    }
-
-    // Testar findAllCategories
-        @Test
-    void simpleTest(){
-        List <Product>products = underTest.findAll();
-        Assertions.assertFalse(products.isEmpty());
-    }
-
-
-  */
 
     // Tester till inlämning:
 
@@ -142,12 +97,62 @@ private ProductRepository underTest;
         Assertions.assertTrue(products.addAll(products));
     }
 
-
-
-
-
-
 }
+
+ /*
+
+
+    @Test
+    void whenSearchingForAnExistingTitle_thenReturnThatProduct  (){
+        // given
+        String title = "En dator";
+        underTest.save(new Product(title,
+                25000.0,
+                "Elektronik",
+                "bra o ha",
+                "urTillBild"));
+        // when
+  Optional<Product> optionalProduct  = underTest.findByTitle(title);
+
+  //then
+        // Ett sätt att skriva tre tester
+        assertTrue(optionalProduct.isPresent());
+      assertFalse(optionalProduct.isEmpty());
+      assertEquals(title, optionalProduct.get().getTitle());
+
+
+        // Ett annat sätt att skriva samma tre tester
+      Assertions.assertAll(
+              () -> assertTrue(optionalProduct.isPresent()),
+        () -> assertFalse(optionalProduct.isPresent()),
+              () -> assertEquals(title, optionalProduct.get().getTitle())
+      );
+
+    }
+
+    @Test
+    void whenSearchingForNonExistingTitle_thenReturnEmptyOptional (){
+        // given
+        String title = "En titel som absolut inte finns";
+
+        // when
+       Optional<Product> optionalProduct = underTest.findByTitle(title);
+
+       Assertions.assertAll(
+               () -> assertFalse(optionalProduct.isPresent()),
+               () -> assertTrue(optionalProduct.isEmpty())
+       );
+    }
+
+    // Testar findAllCategories
+        @Test
+    void simpleTest(){
+        List <Product>products = underTest.findAll();
+        Assertions.assertFalse(products.isEmpty());
+    }
+
+
+  */
 
 
 
