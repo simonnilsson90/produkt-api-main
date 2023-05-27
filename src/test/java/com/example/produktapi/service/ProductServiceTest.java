@@ -1,6 +1,7 @@
 package com.example.produktapi.service;
 
 import com.example.produktapi.exception.BadRequestException;
+import com.example.produktapi.exception.EntityNotFoundException;
 import com.example.produktapi.model.Product;
 import com.example.produktapi.repository.ProductRepository;
 import jakarta.persistence.Id;
@@ -45,7 +46,7 @@ class ProductServiceTest {
     // getAllCategories()  Check
     // getProductsByCategory(String category) check
     // getProductById(Integer id) Check
-    // addProduct(Product product) Check  OBS!! Fattas felflöde
+    // addProduct(Product product) Check
     // updateProduct(Product updatedProduct, Integer id) OBS !!! Fattas felflöde
     // deleteProduct(Integer id) Check
 
@@ -139,14 +140,32 @@ class ProductServiceTest {
     }
     // Test passed
 
+    // Felflöde
+
+    @Test
+    void whenAddingDuplicateProduct_thenBadRequestExceptionShouldBeThrown() {
+        // given
+        Product product = new Product("Holy Graal", 5000.0, "jewelry", "The real one", "img_hg");
+
+        // Mocka repository för att returnera en befintlig produkt med samma titel
+        given(repository.findByTitle(product.getTitle())).willReturn(Optional.of(new Product()));
+
+        // when och then
+        assertThrows(BadRequestException.class, () -> underTest.addProduct(product));
+    }
 
 
 
-// Testar att updateProduct åberopas Använder
+
+
+
+
+// Testar att updateProduct åberopas
 // ArgumentMatchers.eq() för att jämföra objekten och verifiera att save()-metoden
 // anropas med rätt uppdaterade produkt.
 
-@Test
+    /*
+    * @Test
 void upDateProduct() {
     // given
     Integer id = 1;
@@ -161,8 +180,27 @@ void upDateProduct() {
     BDDMockito.verify(repository).save(ArgumentMatchers.eq(updatedProduct));
 }
 
+     */
+
+
 
 // Test failed
+
+    // upDateProduct Felflöde
+
+    @Test
+    void whenUpdatingNonExistingProduct_thenEntityNotFoundExceptionShouldBeThrown() {
+        // given
+        Integer id = 1;
+        Product updatedProduct = new Product("Updated Product", 20.0, "category", "description", "img");
+
+        // Mocka repository för att returnera ett tomt Optional, vilket indikerar att produkten inte finns
+        given(repository.findById(id)).willReturn(Optional.empty());
+
+        // when och then
+        assertThrows(EntityNotFoundException.class, () -> underTest.updateProduct(updatedProduct, id));
+    }
+
 
 
 
